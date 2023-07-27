@@ -2,6 +2,10 @@ import { useState } from 'react';
 import uuid from 'react-uuid';
 import './App.css';
 import TodoList from './components/TodoList';
+import GlobalStyle from './GlobalStyle';
+import TodoForm from './components/TodoForm';
+import Footer from './ui/Footer';
+import Header from './ui/Header';
 
 function App() {
   const initialState = [
@@ -31,70 +35,29 @@ function App() {
 
   return (
     <>
-      <header
-        style={{
-          backgroundColor: '#f5dfa2',
-          padding: '10px'
-        }}
-      >
-        헤더입니다.
-      </header>
-      <main
-        style={{
-          backgroundColor: '#c3f7c9',
-          padding: '10px'
-        }}
-      >
-        <div>
-          <h3>INPUT 영역</h3>
-          <div>
-            <form
-              onSubmit={function (event) {
-                event.preventDefault();
+      <GlobalStyle />
+      <Header />
 
-                // TODO: 넣을 객체 생성(new todo)
-                const newTodo = {
-                  id: uuid(),
-                  title,
-                  contents,
-                  isDone: false
-                };
-
-                // TODO: todos state에 넣어줘야 해!!
-                setTodos([...todos, newTodo]);
-              }}
-            >
-              <input
-                type="text"
-                placeholder="제목입력!"
-                value={title}
-                onChange={function (event) {
-                  setTitle(event.target.value);
-                }}
-              />
-              <input
-                type="text"
-                placeholder="내용입력!"
-                value={contents}
-                onChange={function (event) {
-                  setContents(event.target.value);
-                }}
-              />
-              <button type="submit">제출</button>
-            </form>
-          </div>
+      <main className="mainWrapper" style={{ padding: '10px', backgroundColor: '#FFDDCC', padding: '10px' }}>
+        <TodoForm
+          title={title}
+          setTitle={setTitle}
+          todos={todos}
+          setTodos={setTodos}
+          contents={contents}
+          setContents={setContents}
+        />
+        <hr />
+        {/* --------------------------------------------------------------------- */}
+        <div className="yetListWrapper" style={{ marginBottom: '30px' }}>
+          <TodoList todos={todos} setTodos={setTodos} isDone={false} />
         </div>
-        <TodoList todos={todos} setTodos={setTodos} isDone={false} />
-        <TodoList todos={todos} setTodos={setTodos} isDone={true} />
+        <div className="doneListWrapper" style={{ marginBottom: '30px' }}>
+          <TodoList todos={todos} setTodos={setTodos} isDone={true} />
+        </div>
       </main>
-      <footer
-        style={{
-          backgroundColor: '#c3ddf7',
-          padding: '10px'
-        }}
-      >
-        푸터입니다.
-      </footer>
+
+      <Footer />
     </>
   );
 }
