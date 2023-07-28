@@ -1,12 +1,7 @@
 import React from 'react';
 import uuid from 'react-uuid';
+import { Todo } from '../type/todo';
 
-interface Todo {
-  id: string;
-  title: string;
-  contents: string;
-  isDone: boolean;
-}
 interface TodoFormProps {
   title: string;
   setTitle: (title: string) => void; // 함수 시그니처 (함수의 매개변수 & 반환타입을 정의)
@@ -28,7 +23,7 @@ const TodoForm = ({ title, setTitle, todos, setTodos, contents, setContents }: T
       }}
     >
       <form
-        onSubmit={function (event) {
+        onSubmit={function (event: React.FormEvent<HTMLFormElement>) {
           event.preventDefault();
 
           const newTodo = {

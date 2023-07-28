@@ -1,11 +1,5 @@
-import React from 'react';
+import { Todo } from '../type/todo';
 
-interface Todo {
-  id: string;
-  title: string;
-  contents: string;
-  isDone: boolean;
-}
 interface TodoListProps {
   todos: Todo[]; // : ⭐️Todo[]는, 'Todo'라는 객체로 구성된 배열을 의미
   setTodos: (todos: Todo[]) => void; // const todos = [{1}, {2}, {3}]
@@ -34,10 +28,10 @@ function TodoList({ todos, setTodos, isDone }: TodoListProps) {
         }}
       >
         {todos
-          .filter(function (t) {
+          .filter(function (t: Todo) {
             return t.isDone === isDone;
           })
-          .map(function (todo) {
+          .map(function (todo: Todo) {
             return (
               <div
                 style={{
@@ -56,7 +50,7 @@ function TodoList({ todos, setTodos, isDone }: TodoListProps) {
                 <br />
                 <button
                   onClick={function () {
-                    const newTodos = todos.filter((filteredTodo) => filteredTodo.id !== todo.id);
+                    const newTodos = todos.filter((filteredTodo: Todo) => filteredTodo.id !== todo.id);
 
                     setTodos(newTodos);
                   }}
@@ -66,7 +60,7 @@ function TodoList({ todos, setTodos, isDone }: TodoListProps) {
                 <button
                   onClick={function () {
                     // 새로운 배열 생성
-                    const newTodos = todos.map(function (item) {
+                    const newTodos = todos.map(function (item: Todo) {
                       if (item.id === todo.id) {
                         return { ...item, isDone: !item.isDone };
                       } else {
