@@ -1,27 +1,36 @@
-import React from "react";
+import React from 'react';
 
-function TodoList({ todos, setTodos, isDone }) {
+interface Todo {
+  id: string;
+  title: string;
+  contents: string;
+  isDone: boolean;
+}
+interface TodoListProps {
+  todos: Todo[]; // : ⭐️Todo[]는, 'Todo'라는 객체로 구성된 배열을 의미
+  setTodos: (todos: Todo[]) => void; // const todos = [{1}, {2}, {3}]
+  isDone: boolean;
+}
+
+function TodoList({ todos, setTodos, isDone }: TodoListProps) {
   return (
-    <div
-      className="listWrapper"
-      style={{ padding: "10px", textAlign: "center" }}
-    >
+    <div className="listWrapper" style={{ padding: '10px', textAlign: 'center' }}>
       <h2
         style={{
-          fontWeight: "1000",
-          textShadow: "1px 1px 1px rgba(0, 0, 0, 0.5)",
-          margin: "10px",
+          fontWeight: '1000',
+          textShadow: '1px 1px 1px rgba(0, 0, 0, 0.5)',
+          margin: '10px'
         }}
       >
-        {isDone ? "DONELIST" : "TODOLIST"}
+        {isDone ? 'DONELIST' : 'TODOLIST'}
       </h2>
       <section
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 200px))",
-          placeContent: "center",
-          gap: "10px",
-          padding: "10px",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 200px))',
+          placeContent: 'center',
+          gap: '10px',
+          padding: '10px'
         }}
       >
         {todos
@@ -32,10 +41,10 @@ function TodoList({ todos, setTodos, isDone }) {
             return (
               <div
                 style={{
-                  border: "1px solid black",
-                  padding: "10px",
-                  width: "100%",
-                  boxSizing: "border-box",
+                  border: '1px solid black',
+                  padding: '10px',
+                  width: '100%',
+                  boxSizing: 'border-box'
                 }}
                 key={todo.id}
               >
@@ -47,9 +56,7 @@ function TodoList({ todos, setTodos, isDone }) {
                 <br />
                 <button
                   onClick={function () {
-                    const newTodos = todos.filter(
-                      (filteredTodo) => filteredTodo.id !== todo.id
-                    );
+                    const newTodos = todos.filter((filteredTodo) => filteredTodo.id !== todo.id);
 
                     setTodos(newTodos);
                   }}
@@ -71,7 +78,7 @@ function TodoList({ todos, setTodos, isDone }) {
                     setTodos(newTodos);
                   }}
                 >
-                  {isDone ? "취소" : "완료"}
+                  {isDone ? '취소' : '완료'}
                 </button>
               </div>
             );
